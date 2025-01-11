@@ -1,0 +1,42 @@
+[
+  {
+    "TicketID": 7547,
+    "EventName": "\u0410\u0432\u0438\u0430\u0431\u0438\u043B\u0435\u0442",
+    "DepartureCity": "\u041C\u043E\u0441\u043A\u0432\u0430",
+    "ArrivalCity": "\u0411\u0435\u0441\u043B\u0430\u043D",
+    "FlightDate": "2025-01-16T20:05:06.4077713+03:00",
+    "Price": 9756
+  },
+  {
+    "TicketID": 1233,
+    "EventName": "\u0410\u0432\u0438\u0430\u0431\u0438\u043B\u0435\u0442",
+    "DepartureCity": "\u041C\u043E\u0441\u043A\u0432\u0430",
+    "ArrivalCity": "\u0411\u0435\u0441\u043B\u0430\u043D",
+    "FlightDate": "2025-02-03T20:05:06.4077714+03:00",
+    "Price": 9380
+  },
+  {
+    "TicketID": 5850,
+    "EventName": "\u0410\u0432\u0438\u0430\u0431\u0438\u043B\u0435\u0442",
+    "DepartureCity": "\u041C\u043E\u0441\u043A\u0432\u0430",
+    "ArrivalCity": "\u0411\u0435\u0441\u043B\u0430\u043D",
+    "FlightDate": "2025-01-16T20:05:06.4077734+03:00",
+    "Price": 7194
+  },
+  {
+    "TicketID": 7363,
+    "EventName": "\u0410\u0432\u0438\u0430\u0431\u0438\u043B\u0435\u0442",
+    "DepartureCity": "\u041C\u043E\u0441\u043A\u0432\u0430",
+    "ArrivalCity": "\u0411\u0435\u0441\u043B\u0430\u043D",
+    "FlightDate": "2025-01-18T20:05:06.4077735+03:00",
+    "Price": 9499
+  },
+  {
+    "TicketID": 9629,
+    "EventName": "\u0410\u0432\u0438\u0430\u0431\u0438\u043B\u0435\u0442",
+    "DepartureCity": "\u041C\u043E\u0441\u043A\u0432\u0430",
+    "ArrivalCity": "\u0411\u0435\u0441\u043B\u0430\u043D",
+    "FlightDate": "2025-01-29T20:05:06.4077747+03:00",
+    "Price": 4246
+  }
+]

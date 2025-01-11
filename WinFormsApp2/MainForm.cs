@@ -5,17 +5,17 @@ using System.Windows.Forms;
 public partial class MainForm : Form
 {
     private BookingManager bookingManager = new BookingManager();
+    private string currentUser;
 
-    public MainForm()
+    public MainForm(string user)
     {
         InitializeComponent();
+        currentUser = user;
         LoadTicketsToListBox();
     }
 
-
     private void btnBookTicket_Click(object sender, EventArgs e)
     {
-
         string departureCity = txtDepartureCity.Text;
         string arrivalCity = txtArrivalCity.Text;
 
@@ -61,20 +61,30 @@ public partial class MainForm : Form
 
         if (selectedTickets.Count > 0)
         {
-            bookingManager.SaveSelectedTickets("tickets.json", selectedTickets);
-            MessageBox.Show("Выбранные билеты сохранены в файл!", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            bookingManager.SaveSelectedTickets(currentUser, selectedTickets);
+            MessageBox.Show("Билеты добавлены в вашу корзину!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
-            MessageBox.Show("Пожалуйста, выберите хотя бы один билет для сохранения.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Пожалуйста, выберите хотя бы один билет.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 
     private void btnLoad_Click(object sender, EventArgs e)
     {
-        bookingManager.LoadTickets("tickets.json");
-        MessageBox.Show("Билеты загружены из файла!", "Загрузка", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        LoadTicketsToListBox();
+        var userTickets = bookingManager.GetUserTickets(currentUser);
+        if (userTickets.Count == 0)
+        {
+            MessageBox.Show("Ваша корзина пуста.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        else
+        {
+            listBoxTickets.Items.Clear();
+            foreach (var ticket in userTickets)
+            {
+                listBoxTickets.Items.Add(ticket);
+            }
+        }
     }
 
     private void LoadTicketsToListBox()

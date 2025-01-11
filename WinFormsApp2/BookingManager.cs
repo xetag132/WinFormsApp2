@@ -5,34 +5,58 @@ using System.Text.Json;
 
 public class BookingManager
 {
-    public delegate void TicketBookedHandler(Ticket ticket);
-    public event TicketBookedHandler TicketBooked;
-
     private List<Ticket> tickets = new List<Ticket>();
+    private const string CartDirectory = "UserCarts";
+
+    public BookingManager()
+    {
+        if (!Directory.Exists(CartDirectory))
+        {
+            Directory.CreateDirectory(CartDirectory);
+        }
+    }
 
     public void BookTicket(Ticket ticket)
     {
         tickets.Add(ticket);
-        TicketBooked?.Invoke(ticket);
     }
 
-    public void SaveSelectedTickets(string filePath, IEnumerable<Ticket> selectedTickets)
+    public void SaveSelectedTickets(string user, IEnumerable<Ticket> selectedTickets)
     {
-        string jsonString = JsonSerializer.Serialize(selectedTickets);
-        File.WriteAllText(filePath, jsonString);
+        string cartFilePath = GetCartFilePath(user);
+        List<Ticket> userCart = LoadUserCart(user);
+
+        userCart.AddRange(selectedTickets);
+
+        string json = JsonSerializer.Serialize(userCart, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(cartFilePath, json);
     }
 
-    public void LoadTickets(string filePath)
+    public List<Ticket> GetUserTickets(string user)
     {
-        if (File.Exists(filePath))
-        {
-            string jsonString = File.ReadAllText(filePath);
-            tickets = JsonSerializer.Deserialize<List<Ticket>>(jsonString) ?? new List<Ticket>();
-        }
+        return LoadUserCart(user);
     }
 
     public List<Ticket> GetTickets()
     {
         return tickets;
+    }
+
+    private List<Ticket> LoadUserCart(string user)
+    {
+        string cartFilePath = GetCartFilePath(user);
+
+        if (!File.Exists(cartFilePath))
+        {
+            return new List<Ticket>();
+        }
+
+        string json = File.ReadAllText(cartFilePath);
+        return JsonSerializer.Deserialize<List<Ticket>>(json) ?? new List<Ticket>();
+    }
+
+    private string GetCartFilePath(string user)
+    {
+        return Path.Combine(CartDirectory, $"{user}_cart.json");
     }
 }

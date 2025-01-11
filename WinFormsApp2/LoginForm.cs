@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Forms;
+
 public partial class LoginForm : Form
 {
     private const string UsersFilePath = "users.json";
@@ -28,7 +29,7 @@ public partial class LoginForm : Form
         {
             MessageBox.Show("Вход выполнен успешно!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Hide();
-            MainForm mainForm = new MainForm();
+            MainForm mainForm = new MainForm(login); // Передаем имя пользователя
             mainForm.ShowDialog();
             this.Close();
         }
